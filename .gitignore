@@ -1,0 +1,7 @@
+# Compiled class file
+**/target/
+*.class
+.idea
+*.iml
+*Test.java
+**/test/
