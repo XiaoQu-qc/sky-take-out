@@ -96,4 +96,27 @@ public class SetmealServiceImpl implements SetmealService {
         //删除setmealdish表中数据
         setmealDishMapper.deleteBySetmealIds(ids);
     }
+
+    /**
+     * 根据套餐id查询套餐(套餐所含菜品)
+     * @param id
+     * @return
+     */
+    @Override
+    public SetmealVO getByIdWithDish(Long id) {
+
+        SetmealVO setmealVO = new SetmealVO();
+
+        //根据id查询套餐
+        Setmeal setmeal = setmealMapper.getById(id);
+        BeanUtils.copyProperties(setmeal, setmealVO);
+
+        //根据套餐id查询相应的菜品
+        //TODO categoryName字段没有数据
+        List<SetmealDish> setmealDishes= setmealDishMapper.getBySetmealId(id);
+
+        //两个返回结果并入SetmealVO，当然也可以在数据库表中连表查询（又好像不行？）
+        setmealVO.setSetmealDishes(setmealDishes);
+        return setmealVO;
+    }
 }
