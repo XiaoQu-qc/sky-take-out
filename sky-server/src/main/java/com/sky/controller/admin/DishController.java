@@ -43,7 +43,7 @@ public class DishController {
         dishService.saveWithFlavor(dishDTO);
 
         //清理缓存
-        cleanCache("dish_"+dishDTO.getCategoryId());
+        cleanCache("dish_"+dishDTO.getCategoryId() );
 
         return Result.success();
     }
