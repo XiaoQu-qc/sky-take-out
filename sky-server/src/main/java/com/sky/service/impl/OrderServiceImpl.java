@@ -133,7 +133,8 @@ public class OrderServiceImpl implements OrderService {
 //        }
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("code","ORDERPAID");
+        //由于该方法原先的返回值是和预支付相关的，这里不返回任何对象也不影响程序
+        //jsonObject.put("code","ORDERPAID");
         OrderPaymentVO vo = jsonObject.toJavaObject(OrderPaymentVO.class);
         vo.setPackageStr(jsonObject.getString("package"));
 
