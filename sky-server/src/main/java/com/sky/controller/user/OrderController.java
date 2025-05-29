@@ -47,4 +47,16 @@ public class OrderController {
         log.info("生成预支付交易单：{}", orderPaymentVO);
         return Result.success(orderPaymentVO);
     }
+
+    /**
+     * 用户催单
+     * @return
+     */
+    //用户催单方法是user调用的方法，在service中需要通知到admin，因此需要用到admin和后端建立的websocket接口
+    @GetMapping("/reminder/{id}")
+    @ApiOperation("用户催单")
+    public Result reminder(@PathVariable("id") Long id){
+        orderService.reminder(id);
+        return Result.success();
+    }
 }
