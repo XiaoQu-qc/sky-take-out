@@ -83,4 +83,32 @@
             </if>
         </where>
     </select>
+
+    <select id="sumByDateRange" resultType="java.util.Map">
+        select
+        date(order_time) as order_date,
+        sum(case when status = #{status} then amount else 0 end) as turnover
+        from orders
+        where order_time &gt; #{beginTime} and order_time &lt; #{endTime}
+        group by date(order_time)
+        having order_date in
+        <foreach item="date" collection="dateList" open="(" separator="," close=")">
+            #{date}
+        </foreach>
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from orders
+        <where>
+            <if test="begin != null">
+                and order_time &gt; #{begin}
+            </if>
+            <if test="end != null">
+                and order_time &lt; #{end}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>
