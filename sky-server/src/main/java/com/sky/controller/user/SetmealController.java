@@ -30,7 +30,7 @@ public class SetmealController {
      */
     @GetMapping("/list")
     @ApiOperation("根据分类id查询套餐")
-    @Cacheable(cacheNames = "setmealCache",key = "#categoryId") //redis中对应的键setmealCache::6
+    @Cacheable(cacheNames = "setmealCache",key = "#categoryId") //redis中对应的键setmealCache::6;实际user端用户很多，这个接口的访问量很大，并且某个套餐分类中的套餐详情又很少改变，用redis是很合适的
     public Result<List<Setmeal>> list(Long categoryId) {
         Setmeal setmeal = new Setmeal();
         setmeal.setCategoryId(categoryId);
